@@ -2,28 +2,34 @@
 #include<cmath>
 #include<string>
 using namespace std;
-string longestPalindrome(string s) {//·´×ªSÇó SºÍS·´×ªµÄ×î³¤¹«¹²×Ó´®
-	int len = s.length();
+string longestPalindrome(string s) {//åè½¬Sæ±‚ Så’ŒSåè½¬çš„æœ€é•¿å…¬å…±å­ä¸²
+	double len = s.length();
 	string s_reverse="" ;
 	string result="" ;
 	if (len > 0) {
-		for (int i = len - 1; i >= 0; i--) {
+		for (double i = len - 1; i >= 0; i--) {
 			s_reverse += s[i];
 		}
-		//s_reverse ³õÊ¼»¯Íê³É
-		//Çó¹«¹²×î³¤×Ö´®
-		for (int i = 0; i <= s.length() - 1; i++) {
-			for (int j = i; j <= s.length() - 1; j++) {
+		//s_reverse åˆå§‹åŒ–å®Œæˆ
+		//æ±‚å…¬å…±æœ€é•¿å­—ä¸²
+		for (double i = 0; i <= s.length() - 1&&s.length()-i+1>result.length(); i++) {
+			for (double j = i; j <= s.length() - 1; j++) {
 				string temp = "";
-				for (int t = i; t <= j; t++) {
+				for (double t = i; t <= j; t++) {
 					temp += s[t];
 				}
 				if (s_reverse.find(temp) != string::npos) {
-					//ÕÒµ½
-					result = (result.length() > temp.length()) ? result : temp;
+					//æ‰¾åˆ°
+					double k;
+					for ( k = 0; k <= temp.length() / 2; k++) {
+						if (temp[k] != temp[temp.length() - k-1])
+							break;
+					}
+					if(k==temp.length()/2+1)
+						result = (result.length() > temp.length()) ? result : temp;
 				}
 				else {
-					//Î´ÕÒµ½
+					//æœªæ‰¾åˆ°
 					break;
 				}
 			}
