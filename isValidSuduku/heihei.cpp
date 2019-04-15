@@ -7,11 +7,9 @@ int hash_function(int n ){
 bool repeat(vector<char> un_check){
     vector<int> temp(9,0);
     int location=0;
-    for(int i=0;i<un_check.size();i++){
+    for(int i=0;i<9;i++){
         if(un_check[i]!='.' ){
-//            cout<<un_check[i]<<endl;
             location=hash_function(un_check[i]-'0');
-            if(location>=0){
             if( temp[location]!=0){
                 return false;
             }
@@ -21,7 +19,7 @@ bool repeat(vector<char> un_check){
         }
         else{
             continue;
-        }}
+        }
     }
 //    for(int i =0;i<9;i++) cout<<temp[i];
 //    cout<<endl;
@@ -43,6 +41,7 @@ bool isValidSudoku(vector<vector<char>>& board) {
             if(board[i][j]!='.'){
                 if(col_flag[j]== false){
                     vector<char> temp(9);
+                    temp.clear();
                     for(int row=0;row<9;row++){
                         temp.push_back(board[row][j]);
                     }
@@ -63,6 +62,7 @@ bool isValidSudoku(vector<vector<char>>& board) {
         //执行块
         if((i+1)%3==0){
             vector<char>block(9);
+            block.clear();
             for(int block_id=0;block_id<3;block_id++){
                 for(int k=0;k<3;k++){
                     block.push_back(board[i-2][k+block_id*3]);
@@ -72,7 +72,6 @@ bool isValidSudoku(vector<vector<char>>& board) {
                 block_flag[block_id]=repeat(block);
                 block.clear();
             }
-            cout<<block_flag[0]<<" "<<block_flag[1]<<" "<<block_flag[2]<<endl;
             if(block_flag[0] && block_flag[1] && block_flag[2]) continue;
             else return false;
 
@@ -101,9 +100,7 @@ int main(void){
     temp.push_back(tmp7);
     temp.push_back(tmp8);
     temp.push_back(tmp9);
-    std::cout<<isValidSudoku(temp);
-
-}
+    isValidSudoku(temp);}
 //[".",".",".",".","5",".",".","1","."],
 //[".","4",".","3",".",".",".",".","."],
 //[".",".",".",".",".","3",".",".","1"],
